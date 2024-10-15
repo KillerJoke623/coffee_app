@@ -39,10 +39,6 @@ class Cart {
   }
 
   void decrementItemCount(CartItem item) {
-    if (item.count > 1) {
-      item.count--;
-    } else {
-      removeItem(item);
-    }
+    item.count--;
   }
 }
