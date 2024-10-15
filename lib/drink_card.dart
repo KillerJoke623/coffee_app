@@ -17,26 +17,42 @@ class DrinkCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        children: [
-          Image.asset(imageUrl),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text('$price руб.'),
-              ],
+      child: SizedBox( // Ограничиваем высоту карточки
+        height: 250, // Можно подстроить это значение
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch, // Растягиваем содержимое по горизонтали
+          children: [
+            Expanded( // Занимаем все доступное пространство изображением
+              child: Image.asset(
+              imageUrl,
+                fit: BoxFit.cover, // Растягиваем изображение на всю ширину
+              ),
+          ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                name,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
-          IconButton(
-            onPressed: onPlusPressed,
-            icon: const Icon(Icons.add_circle),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // Размещаем элементы по краям
+                children: [
+                  Text(
+                  '$price руб.', // Здесь будет цена с учетом размера
+                  ),
+                  IconButton(
+                    onPressed: onPlusPressed,
+                    icon: const Icon(Icons.add_circle),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
