@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'cart.dart';
+import 'cart_screen.dart';
 
 import 'menu_screen.dart';
 
@@ -31,18 +33,25 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+  final cart = Cart();
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    MenuScreen(),
-    Text('Корзина'),
-    Text('Заказы'),
-  ];
+  _MyHomePageState() {
+    _widgetOptions = <Widget>[
+      MenuScreen(cart: cart),
+      CartScreen(cart: cart),
+      const Text('Заказы'),
+    ];
+  }
+
+  List<Widget> _widgetOptions = <Widget>[];
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
+
+
 
   @override
   Widget build(BuildContext context) {
